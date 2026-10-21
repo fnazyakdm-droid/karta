@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Карта адресов</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/leaflet/leaflet.css">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="app">
+  <main class="map-wrap">
+    <div id="map" aria-label="Карта России"></div>
+    <div id="conn" class="conn" hidden>Нет связи с сервером, переподключаюсь…</div>
+    <div id="toast" class="toast" role="status" hidden></div>
+  </main>
+
+  <aside class="panel" id="panel">
+    <header class="panel-head">
+      <h1>Карта адресов</h1>
+      <button id="meBtn" class="me" type="button" title="Сменить имя">
+        <span class="dot" id="meDot"></span><span id="meName">…</span>
+      </button>
+    </header>
+
+    <section class="block">
+      <form id="searchForm" class="search" autocomplete="off">
+        <label class="sr" for="q">Поиск адреса</label>
+        <input id="q" type="search" placeholder="Город, улица, дом: например, Казань, Баумана 51" enterkeyhint="search">
+        <button type="submit">Найти</button>
+      </form>
+      <ul id="results" class="results" hidden></ul>
+      <p id="searchMsg" class="hint" hidden></p>
+      <p class="hint small">Либо приблизьте карту и нажмите на дом.</p>
+    </section>
+
+    <section class="block" id="cardBlock" hidden>
+      <div class="card" id="card"></div>
+    </section>
+
+    <section class="block">
+      <h2>Сейчас на карте <span class="count" id="onlineCount">0</span></h2>
+      <ul id="users" class="users"></ul>
+    </section>
+
+    <section class="block grow">
+      <h2>Адреса</h2>
+      <div class="tabs" id="tabs" role="tablist">
+        <button type="button" role="tab" data-f="all" aria-selected="true">Все <span class="count"></span></button>
+        <button type="button" role="tab" data-f="working" aria-selected="false">В работе <span class="count"></span></button>
+        <button type="button" role="tab" data-f="done" aria-selected="false">Изучено <span class="count"></span></button>
+        <button type="button" role="tab" data-f="mine" aria-selected="false">Мои <span class="count"></span></button>
+      </div>
+      <ul id="addrList" class="addr-list"></ul>
+    </section>
+  </aside>
+</div>
+
+<div class="gate" id="gate" hidden>
+  <form class="gate-card" id="gateForm">
+    <h2 id="gateTitle">Как вас зовут?</h2>
+    <p>Имя увидят другие участники рядом с адресами, которые вы смотрите и берёте в работу.</p>
+    <label class="sr" for="nameInput">Имя</label>
+    <input id="nameInput" type="text" maxlength="30" required placeholder="Ваше имя" autocomplete="nickname">
+    <div class="gate-actions">
+      <button type="button" class="ghost" id="gateCancel" hidden>Отмена</button>
+      <button type="submit" class="primary">Войти</button>
+    </div>
+  </form>
+</div>
+
+<script src="/leaflet/leaflet.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>
